@@ -3,6 +3,7 @@
 var mongoose = require('mongoose');
 var dado = mongoose.model('Dados');
 
+
 exports.listAll = function(req, res){
     dado.find({}, function(err, msg){
         if(err)
