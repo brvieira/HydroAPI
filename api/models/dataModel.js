@@ -2,11 +2,16 @@
 
 var mongoose = require('mongoose');
 var schema = mongoose.Schema;
+
 var dataSchema = new schema({
     temperaturaInterna: {
         type: String
     },
     umidadeInterna: {
+        type: String
+    },
+
+    temperaturaSolucao: {
         type: String
     },
 
