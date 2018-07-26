@@ -5,5 +5,5 @@ module.exports = function(app){
 
     app.route('/dados').get(dados.listAll);
     app.route('/dados').post(dados.save);
-
+    
 };

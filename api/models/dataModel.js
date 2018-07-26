@@ -5,14 +5,14 @@ var schema = mongoose.Schema;
 
 var dataSchema = new schema({
     temperaturaInterna: {
-        type: String
+        type: Number
     },
     umidadeInterna: {
-        type: String
+        type: Number
     },
 
     temperaturaSolucao: {
-        type: String
+        type: Number
     },
 
     data: {
