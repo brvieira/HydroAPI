@@ -1,10 +1,23 @@
-'use strict';
+'use strict'
 
-module.exports = function (app) {
-    var dados = require('../controllers/dataController');
+const express = require('express');
+const router = express.Router();
+const dados = require('../controllers/dadosController')();
 
-    app.route('/dados').get(dados.listAll);
-    app.route('/dados/:dataInicial&:dataFinal').get(dados.listByDateRange);
-    app.route('/dados').post(dados.save);
+module.exports = () => {
+    router.post('/', async (req, res) => {
+        res.send(await dados.save(req.body));
+    })
 
+    router.get('/', async (req, res) => {
+        res.send(await dados.listAll());
+    })
+
+    router.get('/:dataInicial/:dataFinal', async (req, res) => {
+        const dataInicial = req.params.dataInicial;
+        const dataFinal = req.params.dataFinal;
+        res.send(await dados.listByDateRange(dataInicial, dataFinal));
+    })
+
+    return router;
 };
