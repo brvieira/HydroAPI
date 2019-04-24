@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use('/dados', require('./api/routes/dataRoutes')());
+app.use('/dados', require('./api/routes/dadosRoutes')());
 
 app.listen(port);
 
