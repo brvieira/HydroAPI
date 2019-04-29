@@ -23,10 +23,10 @@ module.exports = (collectionName) => {
     const insert = async (doc) => {
         try {
             await collection.insertOne(doc);
-            return {message: 'Sucess'}
+            return {message: 'Success', status: true}
         } catch (error) {
             console.error('Erro ao salvar no banco', error);
-            return {message: 'Fail'}
+            return {message: 'Fail', status: false}
         }
     }
 

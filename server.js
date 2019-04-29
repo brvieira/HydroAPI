@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/dados', require('./api/routes/dadosRoutes')());
+app.use('/usuarios', require('./api/routes/usuariosRoutes')());
 
 app.listen(port);
 
