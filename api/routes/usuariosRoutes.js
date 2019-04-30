@@ -13,6 +13,10 @@ module.exports = () => {
         res.send(await usuarios.login(req.body));
     })
 
+    router.post('/editUser', async (req, res) => {
+        res.send(await usuarios.editUser(req.body));
+    })
+
     router.get('/addNode', async (req, res) => {
         const dataInicial = req.params.dataInicial;
         const dataFinal = req.params.dataFinal;

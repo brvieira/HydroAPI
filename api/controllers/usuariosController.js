@@ -14,6 +14,18 @@ module.exports = () => {
         }
     }
 
+    const editUser = async (data) => {
+        delete data._id;
+        try {
+            const saltRounds = 8;
+            data.senha = await bcrypt.hash(data.senha, saltRounds);
+        } catch (error) {
+            console.error('Erro ao gerar hash')
+        } finally {
+            return await colecaoUsuarios.update({email: data.email}, data);
+        }
+    }
+
     const login = async (data) => {
         let response = {};
         try {
@@ -24,7 +36,6 @@ module.exports = () => {
             if(usuario.length > 0) {
                 usuario = usuario[0];
                 if(await bcrypt.compare(data.senha, usuario.senha)) {
-                    delete usuario.senha;
                     response = {status: true, usuario};
                 } else {
                     response = {status: false, message: 'Senha Inválida!'}
@@ -46,6 +57,7 @@ module.exports = () => {
     return {
         newUser,
         login,
+        editUser,
         addNode
     }
 }

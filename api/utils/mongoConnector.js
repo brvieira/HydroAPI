@@ -37,11 +37,11 @@ module.exports = (collectionName) => {
      */
     const update = async (oldDoc, newDoc) => {
         try {
-            await collection.update(oldDoc, { '$set': newDoc });
-            return {message: 'Sucess'}
+            await collection.updateOne(oldDoc, { '$set': newDoc });
+            return {message: 'Success', status: true}
         } catch (error) {
             console.error('Erro ao atualizar no banco', error);
-            return {message: 'Fail'}
+            return{message: 'Fail', status: false}
         }
     }
 
