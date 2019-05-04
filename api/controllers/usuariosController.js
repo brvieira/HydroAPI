@@ -5,12 +5,20 @@ const bcrypt = require('bcrypt');
 module.exports = () => {
     const newUser = async (data) => {
         try {
-            const saltRounds = 8;
-            data.senha = await bcrypt.hash(data.senha, saltRounds);
+            const query = {
+                email: data.email
+            }
+            const checkUser = await colecaoUsuarios.select(query);
+
+            if(checkUser.length > 0) {
+                return {status: false, message: "Email já cadastrado!"}
+            } else {
+                const saltRounds = 8;
+                data.senha = await bcrypt.hash(data.senha, saltRounds);
+                return await colecaoUsuarios.insert(data);
+            }
         } catch (error) {
             console.error('Erro ao gerar hash')
-        } finally {
-            return await colecaoUsuarios.insert(data);
         }
     }
 
@@ -49,9 +57,16 @@ module.exports = () => {
             return response;
         }
     }
+
     //TODO - Implementar função para inserção de novos nós sensores
     const addNode = async (data) => {
-
+        try {
+            delete data._id;
+            return await colecaoUsuarios.update({email: data.email}, data);
+        } catch (error) {
+            console.error("Erro ao adicionar nó sensor!");
+            return {status: false, message: "Erro ao adicionar nó sensor!"}
+        }
     }
 
     return {

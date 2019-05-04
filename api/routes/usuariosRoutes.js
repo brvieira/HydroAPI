@@ -17,10 +17,8 @@ module.exports = () => {
         res.send(await usuarios.editUser(req.body));
     })
 
-    router.get('/addNode', async (req, res) => {
-        const dataInicial = req.params.dataInicial;
-        const dataFinal = req.params.dataFinal;
-        res.send(await dados.listByDateRange(dataInicial, dataFinal));
+    router.post('/addnode', async (req, res) => {
+        res.send(await usuarios.addNode(req.body));
     })
 
     return router;
