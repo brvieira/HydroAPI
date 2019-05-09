@@ -13,10 +13,9 @@ module.exports = () => {
         res.send(await dados.listAll());
     })
 
-    router.get('/:dataInicial/:dataFinal', async (req, res) => {
-        const dataInicial = req.params.dataInicial;
-        const dataFinal = req.params.dataFinal;
-        res.send(await dados.listByDateRange(dataInicial, dataFinal));
+    router.get('/getData/:token', async (req, res) => {
+        const token = req.params.token;
+        res.send(await dados.listBytoken(token));
     })
 
     return router;
